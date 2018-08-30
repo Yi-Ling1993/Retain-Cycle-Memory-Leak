@@ -8,6 +8,8 @@
 
 import UIKit
 
+protocol SendDataDelegate: class {}
+
 class ViewController: UIViewController {
     
     
@@ -17,6 +19,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func delegate(_ sender: Any) {
+        
+        throughDelegate()
     }
     
     @IBAction func closure(_ sender: Any) {
@@ -33,6 +37,13 @@ class ViewController: UIViewController {
         
         gavin = nil
         computer = nil
+    }
+    
+    func throughDelegate() {
+        
+        var secondVc: SecondVC? = SecondVC()
+        
+        secondVc = nil
     }
     
     func throughClosure() {
@@ -106,6 +117,27 @@ class Element {
         print("\(name) is being deallocated")
     }
     
+}
+
+class FirstVC {
+    
+   weak var delegate: SendDataDelegate?
+    
+}
+
+class SecondVC: SendDataDelegate {
+    
+    lazy var firstVc = FirstVC()
+
+    init() {
+        
+        print("hi")
+         firstVc.delegate = self
+    }
+    
+    deinit {
+        print("In delegate, I'm done")
+    }
 }
 
 
