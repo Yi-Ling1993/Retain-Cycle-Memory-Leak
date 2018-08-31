@@ -106,6 +106,7 @@ class Element {
     lazy var someFunction: () -> String = { [weak self] in
         
         return "The \(self?.name) says \(self?.text)"
+        
     }
     
     init(name: String, text: String) {
@@ -121,7 +122,11 @@ class Element {
 
 class FirstVC {
     
-   weak var delegate: SendDataDelegate?
+    weak var delegate: SendDataDelegate?
+    
+    deinit {
+        print("In FirstVc delegate, I'm done")
+    }
     
 }
 
